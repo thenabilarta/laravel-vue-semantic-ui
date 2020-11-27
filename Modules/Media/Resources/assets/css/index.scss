@@ -1,0 +1,71 @@
+$blue: #0e6eb8;
+$blue-hover: #2185d0;
+$red: #b03060;
+$orange: #fe9a76;
+$yellow: #ffd700;
+$olive: #32cd32;
+$green: #016936;
+$teal: #008080;
+$blue: #0e6eb8;
+$violet: #ee82ee;
+$purple: #b413ec;
+$pink: #ff1493;
+$brown: #a52a2a;
+$grey: #a0a0a0;
+$black: #000000;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .header-filter {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .ui.input > input {
+      max-width: 120px;
+    }
+  }
+
+  .header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 2rem;
+      margin: 0 1rem;
+    }
+  }
+}
+
+.footer {
+  min-height: 50px;
+  padding: 20px;
+
+  button {
+    background-color: $blue;
+    padding: 0.8rem 1.6rem;
+    outline: none;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+
+    &:hover {
+      background-color: $blue-hover;
+    }
+  }
+}

@@ -9,20 +9,22 @@ use Illuminate\Routing\Controller;
 use Modules\Platform\Core\Http\Controllers\AppBaseController;
 use GuzzleHttp\Client;
 
+session_start();
+
 class MediaController extends AppBaseController
 {
     public function index()
     {
-        $client = new Client(['base_uri' => 'http://192.168.44.127']);
+        $client = new Client(['base_uri' => 'http://192.168.1.5']);
 
         $multipart = [
             [
                 'name' => 'client_id',
-                'contents' => 'ZLR24lN2Ztf1HfaPQwKmNy4zVMw8J1F7oc8xRyz6'
+                'contents' => 'kmZJxR7vbRAhCtRkhKOgOyZmjcryktR1jQTUR2lf'
             ],
             [
                 'name' => 'client_secret',
-                'contents' => '3opgkjtvFQKaXmDfGbWKC7WWV0778SFgdGf82n6gUbJEdfSbRgyknwF35iDIWDkOgmKNr9y7KrP6UOkoMMGB24zU9MfTTji8ka3dDAorfHYAHfg7eb0mBrbtopcmeK5oRJNjYGKJHbFPw5diPiru8gOFUdkhMjFMbCB6rYBWPIOO41rkvR29uM31i8782O3eVKjQXPfiVA67zEhW7noAvE0KQO3Qr0wwpSg34IHBtlM9FpTZF1C9NQ3phwCz7f'
+                'contents' => '0Mr1NRvWYlHdQl7P6bBcWQ3izaIq7B5eNTlThZMydTU9iwjP2MTAH4GqD6iHLrDb62rPCsIqBEtFIcEccg4w91CwMObfN9gALCZF5nJ40x8Thsp2LLoF0doZNrrG3eiINBUDvpvxoyo1OtVOHJ4MFJldSWcjpyQwGS7xECdkEkDpLRX7qWoaEyxZ4J1GHtBZNaVN0wk1ahPSbkw4WbDoPSqbBjwyUVY4wBxsCVzmVLPaQPDPIgo0pgdhcjKxVg'
             ],
             [
                 'name' => 'grant_type',
@@ -44,16 +46,20 @@ class MediaController extends AppBaseController
         return view('media::index');
     }
 
-    // public function data()
-    // {
-    //     $client = new Client(['base_uri' => 'http://192.168.44.127']);
+    public function data()
+    {
+        $media = Media::all();
+
+        return $media;
+        
+    //     $client = new Client(['base_uri' => 'http://192.168.1.5']);
 
     //     $headers = [
     //         'Authorization' => 'Bearer ' . $_SESSION["token"],
     //         'Accept' => 'application/json'
     //     ];
 
-    //     $response = $client->request('GET', '/xibo-cms/web/api/library?length=20', [
+    //     $response = $client->request('GET', '/xibo-cms/web/api/display', [
     //         'headers' => $headers
     //     ]);
 
@@ -74,83 +80,99 @@ class MediaController extends AppBaseController
     //     $panel = Panel::all();
 
     //     return $panel;
-    // }
+    }
 
-    // public function addmedia(Request $request)
-    // {
-    //     $file = request('file');
-    //     $imageNameByUser = request('imageName');
+    public function addmedia(Request $request)
+    {
+        $file = request('file');
 
-    //     $fileName = $file->getClientOriginalName();
+        $fileExtension = $file->getClientOriginalName();
 
-    //     $imagePath = $file->storeAs('public/uploads', $fileName);
+        $extensionOnly = explode(".", $fileExtension);
 
-    //     $imageName = explode("/", $imagePath);
+        $fileName = request('fileName');
 
-    //     $client = new Client(['base_uri' => 'http://192.168.44.127']);
+        // if ($fileNameByUser === 'lemon') {
+        //     return response()->json(["status" => "failed", "data" => $fileNameByUser]);
+        // } else {
+        //     return response()->json(["status" => "ok", "data" => $fileNameByUser]);
+        // }
 
-    //     $headers = [
-    //         'Authorization' => 'Bearer ' . $_SESSION["token"],
-    //         'Accept' => 'application/json'
-    //     ];
+        $imagePath = $file->storeAs('public/uploads', $fileName . '.' . end($extensionOnly));
 
-    //     $multipart = [
-    //         [
-    //             'name' => 'name',
-    //             'contents' => $imageNameByUser
-    //         ],
-    //         [
-    //             'name' => 'files',
-    //             'contents' => fopen('C:/Users/thena/Desktop/laravel_bap_vue/storage/app/' . $imagePath, 'r')
-    //         ]
-    //     ];
+        $client = new Client(['base_uri' => 'http://192.168.1.5']);
 
-    //     $response = $client->request('POST', '/xibo-cms/web/api/library', [
-    //         'headers' => $headers,
-    //         'multipart' => $multipart
-    //     ]);
+        $headers = [
+            'Authorization' => 'Bearer ' . $_SESSION["token"],
+            'Accept' => 'application/json'
+        ];
 
-    //     $contents = $response->getBody();
-    //     $content = json_decode($contents, true);
+        $multipart = [
+            [
+                'name' => 'name',
+                'contents' => $fileName
+            ],
+            [
+                'name' => 'files',
+                'contents' => fopen('C:/Users/thena/Desktop/laravel_bap/storage/app/' . $imagePath, 'r')
+            ]
+        ];
 
-    //     if (isset($content["files"][0]["error"])) {
-    //         return response()->json([
-    //             "status" => "failed",
-    //             "messages" => $content["files"][0]["error"]
-    //         ]);
-    //         exit();
-    //     }
+        $response = $client->request('POST', '/xibo-cms/web/api/library', [
+            'headers' => $headers,
+            'multipart' => $multipart
+        ]);
 
-    //     $form_data = array(
-    //         'image_database_name' => $imageName[2],
-    //         'image_name' => $imageNameByUser,
-    //         'image_path' => $imagePath,
-    //         'media_id' => '',
-    //         'retired' => '',
-    //         'size' => '',
-    //         'type' => '',
-    //         'duration' => '',
-    //     );
-        
-    //     if ( !isset($content["files"][0]["error"])) {
-    //         $panel = Panel::create($form_data);
+        $contents = $response->getBody();
+        $content = json_decode($contents, true);
 
-    //         $panels = $panel->getAttributes();
+        if (isset($content["files"][0]["error"])) {
+            return response()->json([
+                "status" => "failed",
+                "messages" => $content["files"][0]["error"]
+            ]);
+            exit();
+        }
 
-    //         $panelmediaid = Panel::find($panels["id"]);
+        $form_data = array(
+            'media_id' => '3',
+            'name' => $fileName,
+            'stored_as' => '3',
+            'file_name' => $fileName . '.' . end($extensionOnly),
+            'file_path' => $imagePath,
+            'retired' => '',
+            'size' => '3',
+            'type' => '3',
+            'tags' => '3',
+            'duration' => '3',
+        );
 
-    //         if($panelmediaid) {
-    //             $panelmediaid->media_id = $content["files"][0]["mediaId"];
-    //             $panelmediaid->retired = $content["files"][0]["retired"];
-    //             $panelmediaid->size = $content["files"][0]["size"];
-    //             $panelmediaid->type = $content["files"][0]["type"];
-    //             $panelmediaid->duration = $content["files"][0]["duration"];
-    //             $panelmediaid->save();
-    //         }
-    //     }
+        if ( !isset($content["files"][0]["error"])) {
+            $media = Media::all();
 
-    //     return response()->json(["status" => "ok"]);
-    // }
+            return $media;
+
+            // $media = Media::create($form_data);
+
+            // $medias = $media->getAttributes();
+
+            // $mediaId = Media::find($medias["id"]);
+
+            // return $media;
+
+            // if($mediaId) {
+            //     $mediaId->media_id = $content["files"][0]["mediaId"];
+            //     $mediaId->retired = $content["files"][0]["retired"];
+            //     $mediaId->stored_as = $content["files"][0]["storedas"];
+            //     $mediaId->size = $content["files"][0]["size"];
+            //     $mediaId->type = $content["files"][0]["type"];
+            //     $mediaId->duration = $content["files"][0]["duration"];
+            //     $mediaId->save();
+            // }
+        }
+
+        // return response()->json(["status" => "ok"]);
+    }
 
     // public function edit($id)
     // {
@@ -171,7 +193,7 @@ class MediaController extends AppBaseController
 
     //     // $media_type_real = $media_type[1];
 
-    //     $client = new Client(['base_uri' => 'http://192.168.44.127']);
+    //     $client = new Client(['base_uri' => 'http://192.168.1.5']);
 
     //     $headers = [
     //         'Authorization' => 'Bearer ' . $_SESSION["token"],
@@ -211,7 +233,7 @@ class MediaController extends AppBaseController
 
     //     $client = new Client();
 
-    //     $url = 'http://192.168.44.127/xibo-cms/web/api/library/' . $panel->media_id;
+    //     $url = 'http://192.168.1.5/xibo-cms/web/api/library/' . $panel->media_id;
 
     //     $response = $client->delete($url, [
     //         'headers'  => [

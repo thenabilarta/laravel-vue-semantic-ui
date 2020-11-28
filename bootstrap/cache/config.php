@@ -18,7 +18,7 @@
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
-    'key' => 'base64:HWatbotxPP3nDXY+zxF6K/bCQfFR+tkbPUOD8/GIbt4=',
+    'key' => 'base64:E6dZartKk03DIo6gciYB/Ywy601gMwHCoAy+MR3LTpk=',
     'cipher' => 'AES-256-CBC',
     'log' => 'single',
     'log_level' => 'debug',
@@ -133,6 +133,7 @@
         'delete_pattern' => '/dropzone/{id}',
       ),
     ),
+    'attachment_model' => 'Bnb\\Laravel\\Attachments\\Attachment',
     'uuid_provider' => 'uuid_v4_base36',
     'behaviors' => 
     array (
@@ -147,9 +148,26 @@
       3 => 'disk',
       4 => 'group',
     ),
+    'dropzone_attributes' => 
+    array (
+      0 => 'uuid',
+      1 => 'url',
+      2 => 'url_inline',
+      3 => 'filename',
+      4 => 'filetype',
+      5 => 'filesize',
+      6 => 'title',
+      7 => 'description',
+      8 => 'key',
+      9 => 'group',
+    ),
     'storage_directory' => 
     array (
       'prefix' => 'attachments',
+    ),
+    'database' => 
+    array (
+      'connection' => NULL,
     ),
   ),
   'auth' => 
@@ -470,6 +488,8 @@
       1 => '$.',
       2 => 'function',
     ),
+    'script' => 'datatables::script',
+    'editor' => 'datatables::editor',
   ),
   'debugbar' => 
   array (
@@ -559,6 +579,7 @@
     'inject' => true,
     'route_prefix' => '_debugbar',
     'route_domain' => NULL,
+    'theme' => 'auto',
   ),
   'excel' => 
   array (
@@ -875,7 +896,10 @@
     'format' => 'php',
     'meta_filename' => '.phpstorm.meta.php',
     'include_fluent' => true,
+    'include_factory_builders' => false,
     'write_model_magic_where' => true,
+    'write_model_relation_count_properties' => true,
+    'write_eloquent_model_mixins' => false,
     'include_helpers' => false,
     'helper_files' => 
     array (
@@ -885,6 +909,9 @@
     array (
       0 => 'app',
       1 => 'Modules',
+    ),
+    'ignored_models' => 
+    array (
     ),
     'extra' => 
     array (
@@ -924,6 +951,7 @@
       'integer' => 'int',
       'boolean' => 'bool',
     ),
+    'include_class_docblocks' => false,
   ),
   'image' => 
   array (
@@ -1447,8 +1475,37 @@
       'model_has_roles' => 'model_has_roles',
       'role_has_permissions' => 'role_has_permissions',
     ),
-    'cache_expiration_time' => 1440,
+    'column_names' => 
+    array (
+      'model_morph_key' => 'model_id',
+    ),
     'display_permission_in_exception' => false,
+    'cache' => 
+    array (
+      'expiration_time' => 
+      DateInterval::__set_state(array(
+         'y' => 0,
+         'm' => 0,
+         'd' => 0,
+         'h' => 24,
+         'i' => 0,
+         's' => 0,
+         'f' => 0.0,
+         'weekday' => 0,
+         'weekday_behavior' => 0,
+         'first_last_day_of' => 0,
+         'invert' => 0,
+         'days' => false,
+         'special_type' => 0,
+         'special_amount' => 0,
+         'have_weekday_relative' => 0,
+         'have_special_relative' => 0,
+      )),
+      'key' => 'spatie.permission.cache',
+      'model_key' => 'name',
+      'store' => 'default',
+    ),
+    'cache_expiration_time' => 1440,
     'log_registration_exception' => true,
   ),
   'queue' => 
@@ -1675,6 +1732,9 @@
   ),
   'tinker' => 
   array (
+    'commands' => 
+    array (
+    ),
     'dont_alias' => 
     array (
     ),
@@ -1707,6 +1767,10 @@
   'dashboard' => 
   array (
     'name' => 'Dashboard',
+  ),
+  'media' => 
+  array (
+    'name' => 'Media',
   ),
   'account' => 
   array (

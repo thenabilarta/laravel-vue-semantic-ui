@@ -23,12 +23,21 @@
           </sui-dropdown-menu>
         </sui-dropdown>
       </sui-table-cell>
+      <EditTableRow
+        v-on:closeModal="onCloseModal"
+        v-if="isEditing"
+      ></EditTableRow>
     </sui-table-row>
   </sui-table-body>
 </template>
 
 <script>
+  import EditTableRow from './EditTableRow';
+
   export default {
+    components: {
+      EditTableRow: EditTableRow,
+    },
     name: 'TableRow',
     props: {
       list: Object,
@@ -38,6 +47,7 @@
     data() {
       return {
         listProps: this.list,
+        isEditing: false,
       };
     },
     methods: {
@@ -45,7 +55,10 @@
         console.log(this.listProps.media_id);
       },
       toEdit() {
-        console.log(this.listProps.media_id);
+        this.isEditing = true;
+      },
+      onCloseModal() {
+        this.isEditing = false;
       },
     },
   };

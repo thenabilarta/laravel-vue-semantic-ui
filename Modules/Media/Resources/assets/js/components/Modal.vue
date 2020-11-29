@@ -139,14 +139,14 @@
           .then((this.uploading = true))
           .then((response) => {
             console.log(response.data);
-            // if (response.data.status === 'ok') {
-            //   f.uploadResult = 'success';
-            // } else {
-            //   f.uploadResult = 'error';
-            //   f.uploadError = true;
-            //   f.status = 'error';
-            //   f.uploadPercentage = 0;
-            // }
+            if (response.data.status === 'ok') {
+              f.uploadResult = 'success';
+            } else {
+              f.uploadResult = 'error';
+              f.uploadError = true;
+              f.status = 'error';
+              f.uploadPercentage = 0;
+            }
           });
       },
     },

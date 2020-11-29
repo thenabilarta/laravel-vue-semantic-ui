@@ -3127,3 +3127,30 @@ widart\\laravel-modules\\src\\Commands\\MigrationMakeCommand.php(161): Illuminat
 #76 C:\\Users\\thena\\Desktop\\laravel_bap\\server.php(21): require_once('C:\\\\Users\\\\thena\\\\...')
 #77 {main}
 "} 
+[2020-11-28 15:20:02] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:181)
+[stacktrace]
+#0 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(115): Illuminate\\Log\\LogManager->resolve(NULL)
+#1 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(103): Illuminate\\Log\\LogManager->get(NULL)
+#2 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(526): Illuminate\\Log\\LogManager->driver()
+#3 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(113): Illuminate\\Log\\LogManager->error('The \"-s\" option...', Array)
+#4 C:\\Users\\thena\\Desktop\\laravel_bap\\app\\Exceptions\\Handler.php(40): Illuminate\\Foundation\\Exceptions\\Handler->report(Object(Symfony\\Component\\Console\\Exception\\RuntimeException))
+#5 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(353): App\\Exceptions\\Handler->report(Object(Symfony\\Component\\Console\\Exception\\RuntimeException))
+#6 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(124): Illuminate\\Foundation\\Console\\Kernel->reportException(Object(Symfony\\Component\\Console\\Exception\\RuntimeException))
+#7 C:\\Users\\thena\\Desktop\\laravel_bap\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2020-11-28 15:20:02] laravel.ERROR: The "-s" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"-s\" option does not exist. at C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Input\\ArgvInput.php:118)
+[stacktrace]
+#0 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Input\\ArgvInput.php(100): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOptionSet('seed')
+#1 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Input\\ArgvInput.php(81): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOption('-seed')
+#2 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Command\\Command.php(214): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(166): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#5 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Application.php(1009): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Application.php(273): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\FreshCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\symfony\\console\\Application.php(149): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(89): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\thena\\Desktop\\laravel_bap\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\thena\\Desktop\\laravel_bap\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 {main}
+"} 

@@ -89,4 +89,9 @@ body {
 .footer button:hover {
   background-color: #2185d0;
 }
+
+i,
+th {
+  cursor: pointer !important;
+}
 /*# sourceMappingURL=index.css.map */

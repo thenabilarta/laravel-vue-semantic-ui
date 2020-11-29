@@ -135,43 +135,37 @@ class MediaController extends AppBaseController
         }
 
         $form_data = array(
-            'media_id' => '3',
+            'media_id' => '',
             'name' => $fileName,
-            'stored_as' => '3',
+            'stored_as' => '',
             'file_name' => $fileName . '.' . end($extensionOnly),
             'file_path' => $imagePath,
             'retired' => '',
-            'size' => '3',
-            'type' => '3',
-            'tags' => '3',
-            'duration' => '3',
+            'size' => '',
+            'type' => '',
+            'tags' => '',
+            'duration' => '',
         );
 
         if ( !isset($content["files"][0]["error"])) {
-            $media = Media::all();
+            $media = Media::create($form_data);
 
-            return $media;
+            $medias = $media->getAttributes();
 
-            // $media = Media::create($form_data);
+            $mediaId = Media::find($medias["id"]);
 
-            // $medias = $media->getAttributes();
-
-            // $mediaId = Media::find($medias["id"]);
-
-            // return $media;
-
-            // if($mediaId) {
-            //     $mediaId->media_id = $content["files"][0]["mediaId"];
-            //     $mediaId->retired = $content["files"][0]["retired"];
-            //     $mediaId->stored_as = $content["files"][0]["storedas"];
-            //     $mediaId->size = $content["files"][0]["size"];
-            //     $mediaId->type = $content["files"][0]["type"];
-            //     $mediaId->duration = $content["files"][0]["duration"];
-            //     $mediaId->save();
-            // }
+            if($mediaId) {
+                $mediaId->media_id = $content["files"][0]["mediaId"];
+                $mediaId->retired = $content["files"][0]["retired"];
+                $mediaId->stored_as = $content["files"][0]["storedas"];
+                $mediaId->size = $content["files"][0]["size"];
+                $mediaId->type = $content["files"][0]["type"];
+                $mediaId->duration = $content["files"][0]["duration"];
+                $mediaId->save();
+            }
         }
 
-        // return response()->json(["status" => "ok"]);
+        return response()->json(["status" => "ok"]);
     }
 
     // public function edit($id)
